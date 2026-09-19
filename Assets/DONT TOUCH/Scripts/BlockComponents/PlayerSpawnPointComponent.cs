@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DONT_TOUCH.Enums;
 using DONT_TOUCH.Scripts.BlockSerialization;
+using DONT_TOUCH.Scripts.Editors;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 
@@ -11,13 +12,17 @@ namespace DONT_TOUCH.Scripts.BlockComponents
 	{
 		public override bool RequiredUniqName { get; } = true;
 		public override BlockType BlockType { get; } = BlockType.PlayerSpawnPoint;
+		[SearchableEnum]
 		public List<DefaultRoleTypeId> Roles = new();
-	
+		[SearchableEnum]
+		public List<CustomItemType> CustomRoles = new();
+		
 		public override void Compile(SchematicBlockData block)
 		{
 			block.Properties = new Dictionary<string, object>()
 			{
 				{ nameof(Roles), Roles },
+				{ nameof(CustomRoles), CustomRoles }
 			};
 			base.Compile(block);
 		}
@@ -29,7 +34,16 @@ namespace DONT_TOUCH.Scripts.BlockComponents
 			foreach (var role in ((JArray)block.Properties["Roles"]).ToObject<List<DefaultRoleTypeId>>())
 			{
 				spawnPoint.Roles.Add(role);
-			}		
+			}
+
+			if (block.Properties.TryGetValue("CustomRoles", out var customRolesObj))
+			{
+				foreach (var role in ((JArray)customRolesObj).ToObject<List<CustomItemType>>())
+				{
+					spawnPoint.CustomRoles.Add(role);
+				}
+			}
+
 			base.Decompile(ref gameObject, block, parent);
 		}
 	}

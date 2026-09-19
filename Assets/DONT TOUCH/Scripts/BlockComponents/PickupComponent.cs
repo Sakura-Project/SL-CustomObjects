@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using DONT_TOUCH.Enums;
 using DONT_TOUCH.Scripts.BlockSerialization;
+using DONT_TOUCH.Scripts.Editors;
 using UnityEngine;
 
 
 [ExecuteInEditMode, SelectionBase]
 public class PickupComponent : SchematicBlock
 {
-    [Tooltip("The ItemType of this pickup.")]
+    [Tooltip("The ItemType of this pickup."), SearchableEnum]
     public ItemType ItemType;
-
+    [SearchableEnum]
+    public CustomItemType CustomItemType;
+    
     [Tooltip("Custom Item name/ID.")] public string CustomItem;
 
     [Tooltip(
@@ -31,6 +34,7 @@ public class PickupComponent : SchematicBlock
         {
             { "ItemType", ItemType },
             { "CustomItem", CustomItem },
+            { "CustomItemType", CustomItemType },
             { "AttachmentsCode", AttachmentsCode },
             { "Chance", Chance },
             { "Uses", NumberOfUses },
@@ -46,6 +50,10 @@ public class PickupComponent : SchematicBlock
 
         pickupComponent.ItemType = (ItemType)Convert.ToInt32(block.Properties["ItemType"]);
         pickupComponent.CustomItem = block.Properties["CustomItem"].ToString();
+        if (block.Properties.TryGetValue("CustomItemType", out var customItemTypeObj))
+        {
+            CustomItemType = (CustomItemType)Convert.ToInt32(customItemTypeObj);
+        }
         pickupComponent.AttachmentsCode = block.Properties.TryGetValue("AttachmentsCode", out object attachmentsCode)
             ? attachmentsCode.ToString()
             : "-1";
