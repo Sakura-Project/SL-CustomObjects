@@ -15,7 +15,7 @@ namespace DONT_TOUCH.Scripts.BlockComponents
 		[SearchableEnum]
 		public List<DefaultRoleTypeId> Roles = new();
 		[SearchableEnum]
-		public List<CustomItemType> CustomRoles = new();
+		public List<CustomRoleType> CustomRoles = new();
 		
 		public override void Compile(SchematicBlockData block)
 		{
@@ -38,7 +38,7 @@ namespace DONT_TOUCH.Scripts.BlockComponents
 
 			if (block.Properties.TryGetValue("CustomRoles", out var customRolesObj))
 			{
-				foreach (var role in ((JArray)customRolesObj).ToObject<List<CustomItemType>>())
+				foreach (var role in ((JArray)customRolesObj).ToObject<List<CustomRoleType>>())
 				{
 					spawnPoint.CustomRoles.Add(role);
 				}
