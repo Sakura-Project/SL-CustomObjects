@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DONT_TOUCH.Enums;
+using DONT_TOUCH.Scripts.Components;
 
 
 public class SchematicBlockData
@@ -18,6 +19,6 @@ public class SchematicBlockData
     public SerializableVector Scale { get; set; }
 
     public virtual BlockType BlockType { get; set; }
-
+    public virtual List<ComponentData> Components { get; set; } = new();
     public virtual Dictionary<string, object> Properties { get; set; }
 }

@@ -6,6 +6,7 @@ using DONT_TOUCH.Enums;
 using DONT_TOUCH.Scripts;
 using DONT_TOUCH.Scripts.BlockComponents;
 using DONT_TOUCH.Scripts.BlockSerialization;
+using DONT_TOUCH.Scripts.Components;
 using TMPro;
 using UnityEditor;
 using UnityEngine;

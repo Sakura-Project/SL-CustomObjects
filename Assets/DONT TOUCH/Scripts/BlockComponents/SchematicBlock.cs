@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DONT_TOUCH.Enums;
+using DONT_TOUCH.Scripts.Components;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -56,6 +57,12 @@ public abstract class SchematicBlock : MonoBehaviour
                 { "MovementSmoothing", MovementSmoothing }
             };
         }
+        
+        block.Components = new();
+        foreach (var subComponent in GetComponents<IBlockComponent>())
+        {
+            block.Components.Add(subComponent.Compile());
+        }
     }
 
     public virtual void Decompile(ref GameObject gameObject, SchematicBlockData block, Transform parent)
@@ -76,6 +83,8 @@ public abstract class SchematicBlock : MonoBehaviour
                 MovementSmoothing = Convert.ToByte(movementSmoothing);
             }
         }
+        
+        ComponentManager.AssignComponents(gameObject, block.Components);
     }
     
     [ContextMenu("Center Pivot To Children")]
