@@ -58,6 +58,11 @@ MonoBehaviour:
   - Id: OnSearchAborted
     DisplayName: On Search Aborted
     Actions: []
+  - Id: OnAccessDenied
+    DisplayName: On Access Denied
+    Actions: []
   Shape: 0
   InteractionDuration: 0
   IsLocked: 0
+  Permissions: 0
+  RequireAll: 0
