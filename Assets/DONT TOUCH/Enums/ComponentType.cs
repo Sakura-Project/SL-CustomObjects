@@ -6,5 +6,6 @@ namespace DONT_TOUCH.Enums
         None = 0,
         ScpDoor = 1,
         ComputerUsb = 2,
+        Scp106SinkPaddle = 3,
     }
 }
