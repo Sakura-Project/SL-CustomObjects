@@ -7,5 +7,6 @@ namespace DONT_TOUCH.Enums
         ScpDoor = 1,
         ComputerUsb = 2,
         Scp106SinkPaddle = 3,
+        RadioCenter = 4,
     }
 }
