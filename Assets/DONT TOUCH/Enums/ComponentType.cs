@@ -8,5 +8,6 @@ namespace DONT_TOUCH.Enums
         ComputerUsb = 2,
         Scp106SinkPaddle = 3,
         RadioCenter = 4,
+        CameraSystem = 5,
     }
 }
